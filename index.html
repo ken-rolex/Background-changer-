@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Changer</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- रेंडरिंग मोड की जानकारी प्राप्त करने के लिए स्क्रिप्ट -->
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        console.log('रेंडरिंग मोड की जानकारी:');
+        
+        // Vite और React का पता लगाएं
+        if (window.__VITE_IS_MODERN_BUILD) {
+          console.log('Vite मॉडर्न बिल्ड का उपयोग कर रहा है');
+        }
+        
+        // हाइड्रेशन का पता लगाएं
+        if (window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+          console.log('React DevTools मौजूद है');
+        }
+        
+        // CSR का पता लगाएं (क्लाइंट साइड रेंडरिंग)
+        const renderingMode = document.getElementById('root').children.length === 0 
+          ? 'CSR (Client Side Rendering)' 
+          : 'SSR/SSG (Server Side Rendering या Static Site Generation)';
+        
+        console.log('रेंडरिंग मोड:', renderingMode);
+        
+        // Vite का उपयोग
+        console.log('Vite द्वारा बनाया गया ऐप');
+        
+        // अतिरिक्त जानकारी दिखाएं
+        const renderingInfo = document.createElement('div');
+        renderingInfo.style.position = 'fixed';
+        renderingInfo.style.bottom = '10px';
+        renderingInfo.style.right = '10px';
+        renderingInfo.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        renderingInfo.style.color = 'white';
+        renderingInfo.style.padding = '8px 12px';
+        renderingInfo.style.borderRadius = '4px';
+        renderingInfo.style.fontSize = '14px';
+        renderingInfo.style.zIndex = '9999';
+        renderingInfo.textContent = `रेंडरिंग मोड: ${renderingMode}`;
+        
+        document.body.appendChild(renderingInfo);
+      });
+    </script>
+  </body>
+</html>
